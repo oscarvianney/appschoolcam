@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-cdqx+9p(r%w@h(d$0n-ja^@w$o%%23#6js_=yy%s8qsy$wb5!b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["appschoolcam.herokuapp.com"]
 
 
 # Application definition
