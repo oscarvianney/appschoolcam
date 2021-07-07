@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AppSchoolCamer</title>
+</head>
+
+<body>
+<div cmlass="navbar-fixed">
+    <nav class="teal">
+        <div class="container">
+            <a href="{% url 'index' %}" class="brand-logo">AppSchoolCamer</a>
+            <a href="#" data-target="mobile-nav"
+               class="sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <a href="{% url 'classes' %}">Classes</a>
+                </li>
+                {% if user.is_superuser %}
+                <li>
+                    <a href="{% url 'admin:index' %}">Admin</a>
+                </li>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="{% url 'inbox' %}">Inbox{% if directs_count %}<span class="new badge red">{{ directs_count }}</span>{% endif %}</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+</div>
+<ul class="sidenav" id="modile-nav">
+    <li>
+        <a href="{% url 'classes' %}">Classes</a>
+    </li>
+    {% if user.is_superuser %}
+    <li>
+        <a href="{% url 'admin:index' %}">Admin</a>
+    </li>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <li>
+        <a href="{% url 'logout' %}">Logout</a>
+    </li>
+    {% else %}
+    <li>
+        <a href="{% url 'login' %}">Login</a>
+    </li>
+    {% endif %}
+    <li id="nav-mobile" class="sidenav">
+        <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons left">person</i>Profile</a></li>
+    </li>
+</ul>
+
+<!-- Section: Slider -->
+<section class="slider">
+    <ul class="slides">
+        <li>
+            <img src="{% static 'img/learn.webp' %}"> <!-- random image -->
+            <div class="caption center-align">
+                <h3>Learning</h3>
+                <h5 class="light grey-text text-lighten-3 hide-on-small-only">Learn a new skill here!</h5>
+            </div>
+        </li>
+        <li>
+            <img src="{% static 'img/5.jpg' %}"> <!-- random image -->
+            <div class="caption left-align">
+                <h3>Learning</h3>
+                <h5 class="light grey-text text-lighten-3 hide-on-small-only">Make assigment and get result</h5>
+            </div>
+        </li>
+        <li>
+            <img src="{% static 'img/learn.webp' %}"> <!-- random image -->
+            <div class="caption right-align">
+                <h3>Learning</h3>
+                <h5 class="light grey-text text-lighten-3">Education with parent</h5>
+            </div>
+        </li>
+        <li>
+            <img src="{% static 'img/5.jpg' %}"> <!-- random image -->
+            <div class="caption center-align">
+                <h3>Learning</h3>
+                <h5 class="light grey-text text-lighten-3">Collaboration school</h5>
+            </div>
+        </li>
+    </ul>
+</section>
+
+
+<div class="section">
+    <h4 class="center"><span class="teal-text">ALL</span> CLASSES</h4>
+    <div class="divider"></div>
+</div>
+
+
+<div class="row">
+    {% for class in classes %}
+    <div class="col s4 m3">
+        <div class="card horizontal">
+            <div class="card-image">
+                <img src="{% static 'img/accueil3.jpg' %}">
+            </div>
+            <div class="card-stacked">
+                <div class="card-content">
+                    <p>Class</p>
+                </div>
+                {% if user.profile.user_statut == class.title %}
+                <div class="card-action">
+                    <a href="{% url 'matieres' class.slug %}">{{ class.title }}</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+<section class="section section-icons grey lighten-4 center">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="card-panel">
+                    <i class="material-icons large teal-text">room</i>
+                    <h4>Pick Where</h4>
+                    <p>L’intérêt que revêt cette étude,</p>
+
+                </div>
+
+            </div>
+            <div class="col s12 m4">
+                <div class="card-panel">
+                    <i class="material-icons large teal-text">school</i>
+                    <h4>learning</h4>
+                    <p>L’intérêt que revêt cette étude,</p>
+
+                </div>
+
+            </div>
+            <div class="col s12 m4">
+                <div class="card-panel">
+                    <i class="material-icons large teal-text">device_hub</i>
+                    <h4>Pick Where</h4>
+                    <p>L’intérêt que revêt cette étude,</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+{% block content %}
+
+{% endblock %}
+<section id="popular" class="section section-popular scrollspy">
+
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <h4 class="center"><span class="teal-text">ALL</span> CLASSES</h4>-->
+<!--            {% for class in classes %}-->
+<!--            <div class="col s12 m4">-->
+<!--                <div class="card">-->
+<!--                    <div class="card-image">-->
+<!--                        <a href="{% url 'matieres' class.slug %}">-->
+<!--                            <img src="{% static 'media/user_12/histoire.jpg' %}">-->
+<!--                        </a>-->
+<!--                        <span class="card-title">{{ class.icon }}</span>-->
+
+<!--                    </div>-->
+<!--                    <div class="card-content">{{ class.title }}</div>-->
+
+<!--                </div>-->
+
+<!--            </div>-->
+<!--            {% endfor %}-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    </div>-->
+
+</section>
+<!-- section social media -->
+<section class="section section-follow teal darken-2 white-text center">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h4>Follow AppSchoolCamer</h4>
+                <p>Follow us on social media for special offers</p>
+                <a href="#" class="white-text">
+                    <i class="fab fa-facebook fa-4x"></i>
+                </a>
+                <a href="#" class="white-text">
+                    <i class="fab fa-twitter fa-4x"></i>
+                </a>
+                <a href="#" class="white-text">
+                    <i class="fab fa-youtube fa-4x"></i>
+                </a>
+                <a href="#" class="white-text">
+                    <i class="fab fa-google-plus fa-4x"></i>
+                </a>
+                <a href="#" class="white-text">
+                    <i class="fab fa-linkedin fa-4x"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<footer class="section teal darken-2 white-text center">
+    <p class="flow-text">By@NanaDiteEnsYde1</p>
+
+</footer>
+
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+        const sideNav = document.querySelector('.sidenav');
+          M.Sidenav.init(sideNav, {});
+        const slider = document.querySelector('.slider');
+        M.Slider.init(slider, {
+          indicators: false,
+          height: 500,
+          transition: 500,
+          interval: 6000
+        });
+
+      </script>
+</body>
+</html>

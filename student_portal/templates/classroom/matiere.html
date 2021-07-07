@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block banner %}
+
+<div class="section no-pad-bot" id="index-banner">
+	<div class="container">
+		<br><br>
+
+
+	</div>
+</div>
+
+{% endblock %}
+
+
+{% block content %}
+<div class="section">
+	<h4>Disciplines</h4>
+	<div class="divider"></div>
+</div>
+
+<div class="row">
+{% for matiere in matieres %}
+    <div class="col s12 m4">
+      <a href="{% url 'categories' matiere.slug %}">
+      <div class="card-panel center-align">
+        <i class="material-icons large teal-text">{{ matiere.icon }}</i>
+        <h5  class="teal-text"><b>{{ matiere.title }}</b></h5>
+      </div>
+      </a>
+    </div>
+
+{% endfor %}
+</div>
+
+
+
+
+{% endblock %}

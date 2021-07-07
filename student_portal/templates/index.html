@@ -1,0 +1,47 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block banner %}
+
+<div class="section no-pad-bot " id="index-banner" >
+	<div class="container">
+		<br><br>
+
+	</div>
+	<div class="row center">
+		<br>
+
+	</div>
+</div>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+
+
+<div class="row">
+{% for course in courses %}
+<div class="col s12 m4">
+  <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="{{ course.picture.url }}">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">{{ course.title }}<i class="material-icons right">more_vert</i></span>
+      <p><a href="{% url 'course' course.id %}">Resume</a></p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">About<i class="material-icons right">close</i></span>
+      <p>{{ course.description }}</p>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+</div>
+
+
+{% endblock %}
